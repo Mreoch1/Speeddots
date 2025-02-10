@@ -9,11 +9,28 @@ class GameViewModel: ObservableObject {
     @Published var gameState: GameState = .menu
     @Published var timeRemaining: Int = 60
     @Published var lastTapPosition: CGPoint?
+    @Published var isSoundEnabled: Bool = true {
+        didSet {
+            SoundManager.shared.soundEnabled = isSoundEnabled
+        }
+    }
     
     private var screenBounds: CGRect = .zero
     private var dotsToGenerate: Int = 1
     private var timer: Timer?
     private var gameTimer: Timer?
+    
+    init() {
+        loadSoundEffects()
+    }
+    
+    private func loadSoundEffects() {
+        SoundManager.shared.loadSound(name: "tap", type: "mp3")
+        SoundManager.shared.loadSound(name: "miss", type: "mp3")
+        SoundManager.shared.loadSound(name: "levelUp", type: "mp3")
+        SoundManager.shared.loadSound(name: "gameOver", type: "mp3")
+        SoundManager.shared.loadSound(name: "bonus", type: "mp3")
+    }
     
     func startGame() {
         score = 0
@@ -42,6 +59,7 @@ class GameViewModel: ObservableObject {
         gameTimer?.invalidate()
         gameTimer = nil
         updateHighScore()
+        SoundManager.shared.playSound("gameOver")
     }
     
     private func startGameTimer() {
@@ -81,6 +99,9 @@ class GameViewModel: ObservableObject {
         timer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: false) { [weak self] _ in
             guard let self = self else { return }
             if let index = self.dots.firstIndex(where: { $0.id == newDot.id }) {
+                // Play miss sound
+                SoundManager.shared.playSound("miss")
+                
                 // Animate dot disappearance
                 self.dots[index].startFadeOut()
                 
@@ -98,6 +119,9 @@ class GameViewModel: ObservableObject {
         if let index = dots.firstIndex(where: { $0.id == dot.id }) {
             lastTapPosition = dot.position
             
+            // Play tap sound
+            SoundManager.shared.playSound("tap")
+            
             // Animate successful tap
             dots[index].startTapAnimation()
             
@@ -111,6 +135,8 @@ class GameViewModel: ObservableObject {
                     if self.dotsToGenerate >= self.level {
                         self.level += 1
                         self.dotsToGenerate = 1
+                        // Play level up sound
+                        SoundManager.shared.playSound("levelUp")
                     } else {
                         self.dotsToGenerate += 1
                     }
@@ -118,7 +144,12 @@ class GameViewModel: ObservableObject {
                 }
                 
                 // Add bonus time for successful tap
+                let previousTime = self.timeRemaining
                 self.timeRemaining = min(self.timeRemaining + 2, 60)
+                if self.timeRemaining > previousTime {
+                    SoundManager.shared.playSound("bonus")
+                }
+                
                 self.updateHighScore()
                 
                 // Clear tap position after delay
@@ -134,6 +165,10 @@ class GameViewModel: ObservableObject {
             highScore = score
             UserDefaults.standard.set(highScore, forKey: "HighScore")
         }
+    }
+    
+    func toggleSound() {
+        isSoundEnabled.toggle()
     }
     
     deinit {

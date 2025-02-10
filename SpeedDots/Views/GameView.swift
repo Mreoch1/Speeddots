@@ -58,6 +58,20 @@ struct MenuView: View {
             }
             .scaleEffect(1.0)
             .animation(.spring(response: 0.3, dampingFraction: 0.6), value: true)
+            
+            Button(action: {
+                viewModel.toggleSound()
+            }) {
+                HStack {
+                    Image(systemName: viewModel.isSoundEnabled ? "speaker.wave.2.fill" : "speaker.slash.fill")
+                    Text(viewModel.isSoundEnabled ? "Sound On" : "Sound Off")
+                }
+                .font(.title2)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.gray)
+                .cornerRadius(10)
+            }
         }
     }
 }

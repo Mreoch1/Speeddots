@@ -13,8 +13,10 @@ SpeedDots is a SwiftUI-based game where players need to tap dots quickly and acc
     - GameViewModel.swift (Game logic and state management)
   - Views/
     - GameView.swift (Main game view with menu, gameplay, pause, and game over screens)
-  - Resources/ (Empty - needs implementation)
-  - Utils/ (Empty - needs implementation)
+  - Resources/
+    - Sounds/ (Sound effect files)
+  - Utils/
+    - SoundManager.swift (Sound management system)
 
 ## Completed Features
 1. Basic project structure setup
@@ -43,20 +45,29 @@ SpeedDots is a SwiftUI-based game where players need to tap dots quickly and acc
     - High score celebration animation
     - Button interaction animations
     - Scale and opacity animations for dots
+11. Sound system implementation:
+    - Sound manager with enable/disable functionality
+    - Sound effects for:
+      - Dot taps
+      - Missed dots
+      - Level up
+      - Game over
+      - Bonus time
+    - Sound toggle button in menu
 
 ## TODO List
-1. Add sound effects
-2. Create settings/difficulty levels
-3. Add background music option
-4. Polish UI design
-5. Add particle effects for tap feedback
-6. Implement combo system for quick successive taps
-7. Add tutorial/instructions screen
-8. Create different game modes
-9. Add achievements system
-10. Implement local leaderboard
-11. Add haptic feedback
-12. Optimize performance for different devices
-13. Add difficulty progression system
-14. Implement power-ups system
-15. Add social sharing features 
+1. Create settings/difficulty levels
+2. Add background music option
+3. Polish UI design
+4. Add particle effects for tap feedback
+5. Implement combo system for quick successive taps
+6. Add tutorial/instructions screen
+7. Create different game modes
+8. Add achievements system
+9. Implement local leaderboard
+10. Add haptic feedback
+11. Optimize performance for different devices
+12. Add difficulty progression system
+13. Implement power-ups system
+14. Add social sharing features
+15. Add accessibility features 

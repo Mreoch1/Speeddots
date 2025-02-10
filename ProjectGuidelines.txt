@@ -1,0 +1,62 @@
+# SpeedDots Project Guidelines
+
+## Project Overview
+SpeedDots is a SwiftUI-based game where players need to tap dots quickly and accurately. The game tests reflexes and hand-eye coordination.
+
+## Current Project Structure
+- SpeedDots/
+  - SpeedDotsApp.swift (Main app entry point)
+  - Models/
+    - Dot.swift (Dot model with properties and animation states)
+    - GameState.swift (Game state management)
+  - ViewModels/
+    - GameViewModel.swift (Game logic and state management)
+  - Views/
+    - GameView.swift (Main game view with menu, gameplay, pause, and game over screens)
+  - Resources/ (Empty - needs implementation)
+  - Utils/ (Empty - needs implementation)
+
+## Completed Features
+1. Basic project structure setup
+2. Dot model implementation
+3. Game state model
+4. Initial game view model with basic logic
+5. Main game view implementation including:
+   - Menu screen with high score display
+   - Game play view with score, level, and timer
+   - Pause screen with resume and main menu options
+   - Game over screen with score display and replay option
+6. Basic dot generation and rendering
+7. Basic tap detection and scoring
+8. High score tracking with UserDefaults
+9. Game timer functionality:
+   - 60-second countdown timer
+   - Pause/resume functionality
+   - Bonus time for successful taps
+   - Auto game over when time runs out
+   - Dots disappear if not tapped within 2 seconds
+10. Animations and visual feedback:
+    - Smooth dot appearance/disappearance animations
+    - Tap effect animations
+    - Screen transition animations
+    - Dynamic dot colors
+    - High score celebration animation
+    - Button interaction animations
+    - Scale and opacity animations for dots
+
+## TODO List
+1. Add sound effects
+2. Create settings/difficulty levels
+3. Add background music option
+4. Polish UI design
+5. Add particle effects for tap feedback
+6. Implement combo system for quick successive taps
+7. Add tutorial/instructions screen
+8. Create different game modes
+9. Add achievements system
+10. Implement local leaderboard
+11. Add haptic feedback
+12. Optimize performance for different devices
+13. Add difficulty progression system
+14. Implement power-ups system
+15. Add social sharing features 
